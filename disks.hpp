@@ -97,14 +97,14 @@ public:
   bool is_alternating() const {
     // TODO: Write code for this function, including rewriting the return
     // statement, and then delete these comments.
-  for (int i = 0; i < _colors.size(); i += 2) {
-		if (_colors[i] != DISK_LIGHT) {
-      return false;
-			break;
-		} // if
-	} // for int i
-  return true;
-} // is_alternating
+    for (int i = 0; i < total_count(); i += 2) {
+      if (_colors[i] != DISK_LIGHT) {
+        return false;
+        break;
+      } // if
+    } // for int i
+    return true;
+  } // is_alternating()
 
   // Return true when this disk_state is fully sorted, with all light disks
   // on the left (low indices) and all dark disks on the right (high
@@ -112,10 +112,14 @@ public:
   bool is_sorted() const {
     // TODO: Write code for this function, including rewriting the return
     // statement, and then delete these comments.
-
-
-   return false;
-  }
+    for (int i = 0; i < light_count(); i++) {
+      if (_colors[i] != DISK_LIGHT) {
+        return false;
+        break;
+      } // if
+    } // for
+    return true;
+  } // is_sorted()
 };
 
 // Data structure for the output of the alternating disks problem. That
@@ -147,18 +151,29 @@ public:
 sorted_disks sort_left_to_right(const disk_state& before) {
   // TODO: Write code for this function, including rewriting the return
   // statement, and then delete these comments.
-/*
-	for (int i = 0; i < n-1; i++) {
-		for (int j = 0; j < n-i-1; j++) {
+  disk_state after = before;
 
-		} // for j
-	} // for i
-  */
+	/* for (int i = 0; i < after.total_count(); i++) {
+    if (after.get(i) == DISK_DARK && after.get(i+1) == DISK_LIGHT) {
+      after.swap(i);
+    }
+    std::cout << "i: " << after.get(i);
+    std::cout << "i+1: " << after.get(i+1);
+  } // for int i */
+  while(after.is_sorted() == false) {
+    for (int i = 1; i < after.total_count()-1; i++) {
+      for (int j = 0; j < after.total_count()-i-1; j++) {
+        if (after.get(j) == DISK_DARK && after.get(j+1) == DISK_LIGHT) {
+          after.swap(j);
+        } // if
+      }
+    } // for int i
+  } // while
   // check that the input is in alternating format
   assert(before.is_alternating());
 
   return sorted_disks(before, 0);
-}
+} // sort_left_to_right()
 
 // Algorithm that sorts disks using the lawnmower algorithm.
 sorted_disks sort_lawnmower(const disk_state& before) {
