@@ -1,12 +1,12 @@
 ///////////////////////////////////////////////////////////////////////////////
 // disks.hpp
 //
-// Definitions for two algorithms that each solve the 
+// Definitions for two algorithms that each solve the
 // alternating disks problem.
 //
-// As provided, this header has four functions marked with 
+// As provided, this header has four functions marked with
 // TODO comments.
-// You need to write in your own implementation of these 
+// You need to write in your own implementation of these
 // functions.
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -97,8 +97,14 @@ public:
   bool is_alternating() const {
     // TODO: Write code for this function, including rewriting the return
     // statement, and then delete these comments.
-    return false;
-  }
+  for (int i = 0; i < _colors.size(); i += 2) {
+		if (_colors[i] != DISK_LIGHT) {
+      return false;
+			break;
+		} // if
+	} // for int i
+  return true;
+} // is_alternating
 
   // Return true when this disk_state is fully sorted, with all light disks
   // on the left (low indices) and all dark disks on the right (high
@@ -106,6 +112,8 @@ public:
   bool is_sorted() const {
     // TODO: Write code for this function, including rewriting the return
     // statement, and then delete these comments.
+
+
    return false;
   }
 };
@@ -139,10 +147,16 @@ public:
 sorted_disks sort_left_to_right(const disk_state& before) {
   // TODO: Write code for this function, including rewriting the return
   // statement, and then delete these comments.
+/*
+	for (int i = 0; i < n-1; i++) {
+		for (int j = 0; j < n-i-1; j++) {
 
-  // check that the input is in alternating format  
+		} // for j
+	} // for i
+  */
+  // check that the input is in alternating format
   assert(before.is_alternating());
-  
+
   return sorted_disks(before, 0);
 }
 
