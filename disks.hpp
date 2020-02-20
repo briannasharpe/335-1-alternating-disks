@@ -143,9 +143,6 @@ public:
 
 // Algorithm that sorts disks using the left-to-right algorithm.
 sorted_disks sort_left_to_right(const disk_state& before) {
-  // TODO: Write code for this function, including rewriting the return
-  // statement, and then delete these comments.
-
   // check that the input is in alternating format
   assert(before.is_alternating());
 
@@ -166,16 +163,14 @@ sorted_disks sort_left_to_right(const disk_state& before) {
 
 // Algorithm that sorts disks using the lawnmower algorithm.
 sorted_disks sort_lawnmower(const disk_state& before) {
-  // TODO: Write code for this function, including rewriting the return
-  // statement, and then delete these comments.
   // check that the input is in alternating format
   assert(before.is_alternating());
 
   disk_state after = before;
   int swaps = 0;
 
-  //forwards
   while(after.is_sorted() == false) { //while the array is not sorted
+    //forwards
     for (int i = 1; i < after.total_count()-1; i++) { //for all the elements
       if (after.get(i) == DISK_DARK && after.get(i+1) == DISK_LIGHT) { //if the current disk is dark and the next disk is light
         after.swap(i); //swap them
@@ -184,7 +179,7 @@ sorted_disks sort_lawnmower(const disk_state& before) {
     } //for
 
     //backwards
-    for (int i = 1; i < backwards+1; i++) { //for all the elements
+    for (int i = after.total_count()-1; i < after.total_count()-1; i--) { //for all the elements
       if (after.get(i) == DISK_LIGHT && after.get(i-1) == DISK_DARK) { //if the current disk is light and the previous disk is dark
         after.swap(i); //swap them
         swaps++; //and increase the swap count
