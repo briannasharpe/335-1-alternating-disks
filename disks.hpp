@@ -4,7 +4,7 @@
 // Definitions for two algorithms that each solve the
 // alternating disks problem.
 //
-// As provided, this header has four functions marked with
+// As provided, this header has xfour functions marked with
 // TODO comments.
 // You need to write in your own implementation of these
 // functions.
@@ -95,7 +95,7 @@ public:
   // that the first disk at index 0 is light, the second disk at index 1
   // is dark, and so on for the entire row of disks.
   bool is_alternating() const {
-    for (int i = 0; i < total_count(); i += 2) { //for every 2 elements of the array
+    for (unsigned i = 0; i < total_count(); i += 2) { //for every 2 elements of the array
       if (_colors[i] != DISK_LIGHT) { //if it is not light
         return false; //it is not alternating
       } //if
@@ -107,7 +107,7 @@ public:
   // on the left (low indices) and all dark disks on the right (high
   // indices).
   bool is_sorted() const {
-    for (int i = 0; i < light_count(); i++) { //for the first half of the array
+    for (unsigned i = 0; i < light_count(); i++) { //for the first half of the array
       if (_colors[i] != DISK_LIGHT) { //if it is not a light disk
         return false; //it is not sorted
       } //if
@@ -150,7 +150,7 @@ sorted_disks sort_left_to_right(const disk_state& before) {
   int swaps = 0;
 
   while(after.is_sorted() == false) { //while the array is not sorted
-    for (int i = 1; i < after.total_count()-1; i++) { //for all the elements
+    for (unsigned i = 1; i < after.total_count()-1; i++) { //for all the elements
       if (after.get(i) == DISK_DARK && after.get(i+1) == DISK_LIGHT) { //if the current disk is dark and the next disk is light
         after.swap(i); //swap them
         swaps++; //and increase the swap count
@@ -171,7 +171,7 @@ sorted_disks sort_lawnmower(const disk_state& before) {
 
   while(after.is_sorted() == false) { //while the array is not sorted
     //forwards
-    for (int i = 1; i < after.total_count()-1; i++) { //for all the elements
+    for (unsigned i = 1; i < after.total_count()-1; i++) { //for all the elements
       if (after.get(i) == DISK_DARK && after.get(i+1) == DISK_LIGHT) { //if the current disk is dark and the next disk is light
         after.swap(i); //swap them
         swaps++; //and increase the swap count
@@ -179,9 +179,9 @@ sorted_disks sort_lawnmower(const disk_state& before) {
     } //for
 
     //backwards
-    for (int i = after.total_count()-1; i < after.total_count()-1; i--) { //for all the elements
+    for (unsigned i = after.total_count()-1; i >= 1; i--) { //for all the elements
       if (after.get(i) == DISK_LIGHT && after.get(i-1) == DISK_DARK) { //if the current disk is light and the previous disk is dark
-        after.swap(i); //swap them
+        after.swap(i-1); //swap them
         swaps++; //and increase the swap count
       } //if;
     } //for
